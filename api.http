@@ -36,6 +36,9 @@ DELETE http://localhost:1234/posts/4
 ###API USERS
 
 GET http://localhost:1234/users
+###
+
+GET http://localhost:1234/users/1
 
 ###
 
@@ -43,8 +46,26 @@ POST http://localhost:1234/users
 Content-Type: application/json
 
 {
-    "name": "Leiner Vega Mejía",
-    "lastname": "Vega Mejía",
-    "nickname": "LeinerVM",
-    "email": "leynervm490@gmail.com"
+    "name": "Leyner",
+    "lastname": "Vega Mejia",
+    "nickname": "leynervm",
+    "email": "leynervm@gmail.com"
 }
+###
+
+PATCH http://localhost:1234/users/1
+Content-Type: application/json
+
+{
+    "verified" : "2025-06-19 00:34:00"
+}
+# {
+#     "name": "Leiner",
+#     "lastname": "Vega M",
+#     "nickname": "Leinervm",
+#     "email": "leynervega49@gmail.com",
+#     "status":"1"
+# }
+
+###
+DELETE http://localhost:1234/users/5

@@ -36,9 +36,14 @@ const userScheme = z.object({
     .max(100)
     .email(),
   verified: z
-    .date({
-      invalid_type_error: 'El campo verificado debe ser una fecha válida.',
-      message: 'El campo verificado debe ser una fecha válida.'
+    .string({
+      required_error: 'El campo verificado es obligatorio.',
+      invalid_type_error: 'El campo verificado es obligatorio.',
+      message: 'El campo verificado es obligatorio.'
+    })
+    .transform((val) => new Date(val))
+    .refine((date) => !isNaN(date.getTime()), {
+      message: "El campo verificado debe ser una fecha válida.",
     })
     .nullable()
     .optional(),

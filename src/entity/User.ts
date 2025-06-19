@@ -22,8 +22,8 @@ export class User {
 
   @Column({ type: 'varchar', length: 100, unique: true })
   email: string
-  
-  @CreateDateColumn({ type: 'timestamp', nullable: true })
+
+  @Column({ type: 'timestamp', nullable: true, default: null })
   verified: Date | null
 
   @Column({ type: 'enum', enum: UserStatus, default: UserStatus.ACTIVO })
