@@ -1,0 +1,50 @@
+GET http://localhost:1234
+
+###
+
+GET http://localhost:1234/posts?search=Titulo&publish=local
+
+###
+
+GET http://localhost:1234/posts/6
+
+###
+
+POST http://localhost:1234/posts
+Content-Type: application/json
+
+{
+    "title": "Titulo de prueba 13",
+    "content": "<h1>Este es el contenido de hola mundo, enviado desde la API</h1><p>Contenido detallado del envio del content ......</p>",
+    "publish": "publicado"
+}
+
+###
+
+PATCH http://localhost:1234/posts/7
+Content-Type: application/json
+
+{
+    "publish": "local",
+    "title": "Mi titulo actualizado ahora es 7"
+}
+
+###
+
+DELETE http://localhost:1234/posts/4
+
+###API USERS
+
+GET http://localhost:1234/users
+
+###
+
+POST http://localhost:1234/users
+Content-Type: application/json
+
+{
+    "name": "Leiner Vega Mejía",
+    "lastname": "Vega Mejía",
+    "nickname": "LeinerVM",
+    "email": "leynervm490@gmail.com"
+}
