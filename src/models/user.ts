@@ -2,6 +2,7 @@ import { Equal, Not, Or } from 'typeorm'
 import { AppDataSource } from '../db/db'
 import { User } from '../entity/User'
 import { UserI, UsertFilters } from '../interfaces/user.interface'
+import bcrypt from 'bcrypt'
 
 export class UserModel {
   private static repository = AppDataSource.getRepository(User)
@@ -52,11 +53,25 @@ export class UserModel {
         ]
       }
     }
-    const result = await this.repository.save(user)
-    return { status: 201, user: result }
+
+    const UserPassEncrypt = {
+      ...user,
+      password: bcrypt.hashSync(user.password, 10)
+    }
+    const result = await this.repository.save(UserPassEncrypt)
+    // Forma de quitar o cambiar valor de un parametro del object
+    const { password: _, ...userSaved } = result
+
+    return { status: 201, user: userSaved }
   }
 
-  static update = async ({ id, values }: { id: number, values: Partial<UserI> }) => {
+  static update = async ({
+    id,
+    values
+  }: {
+    id: number
+    values: Partial<UserI>
+  }) => {
     const { email, nickname } = values
     const userSaved = await this.repository.findOneBy({ id })
 
@@ -93,7 +108,10 @@ export class UserModel {
     const user = await this.repository.findOneBy({ id })
     if (user) {
       const result = await this.repository.delete({ id })
-      return { status: 200, message: `${result.affected} registros eliminado correctamente` }
+      return {
+        status: 200,
+        message: `${result.affected} registros eliminado correctamente`
+      }
     }
     return { status: 404, message: `Usuario no encontrado` }
   }

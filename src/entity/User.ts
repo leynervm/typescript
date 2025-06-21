@@ -23,6 +23,9 @@ export class User {
   @Column({ type: 'varchar', length: 100, unique: true })
   email: string
 
+  @Column({ type: 'varchar', length: 255, nullable: true, default: null })
+  password: string | null
+
   @Column({ type: 'timestamp', nullable: true, default: null })
   verified: Date | null
 
